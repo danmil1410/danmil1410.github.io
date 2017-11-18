@@ -7,6 +7,13 @@ $sea: #425cbb
 $darkness: #232323
 $winter: #ebebeb
 
+//CSS Mixins
+@mixin trans
+  transition: .2s ease-in-out
+
+@mixin transf
+  transform: scale(0.98)
+
 // Animations
 @keyframes bounce
   0%
@@ -90,18 +97,27 @@ p
   margin: 0 15px
   border-bottom: 1px solid #ebebeb
 
-.top a
-  height: 85px
-
-.top button
+.top-button,.top-button:active,.top-button:visited
   margin-left: auto
-  padding: 10px 35px
+  height: 35px
+  width: 175px
   border: 2px solid #ebebeb
   cursor: pointer
   letter-spacing: 0.2em
+  line-height: 35px
+  text-align: center
   text-transform: uppercase
   background: transparent
-  transition: .2 ease-in-out
+  @include trans
+  outline: none
+  color: $darkness
+
+.top-button:hover
+  border: 2px solid $sea
+  color: $sea
+
+.top-button:active
+  @include transf
 
 .nav
   display: flex
@@ -118,26 +134,43 @@ p
   height: 65px
 
 .nav-item
-  display: flex
-  align-items: center
-  padding-right: 35px
   height: 100%
 
 .nav-item a
-  color: $darkness
+  display: flex
+  align-items: center
+  height: 100%
+  padding-right: 35px
+  @include trans
+
+.nav-item a:hover
+  box-shadow: inset 0 -5px 0 0 $sea
+  color: $sea !important
 
 .nav-icons
+  display: flex
+  height: 100%
   margin-left: auto
 
-.nav i:nth-child(1)
-  line-height: 65px
-  text-align: right
-  width: 65px
+.nav-icons a,.nav-icons a:active,.nav-icons a:visited,.nav-item a,.nav-item a:active,.nav-item a:visited
+  color: $darkness
+  @include trans
 
-.nav i:nth-child(2)
+.nav-icons a
+  cursor: pointer
+  font-size: 18px
   line-height: 65px
-  text-align: center
   width: 65px
+  @include trans
+
+.nav-icons a:hover
+  color: $sea
+
+.nav-icons a:nth-child(1)
+  text-align: right
+
+.nav-icons a:nth-child(2)
+  text-align: center
 
 .main
   display: grid
@@ -352,23 +385,28 @@ p
   margin-right: 15px
   color: $darkness
 
-.portfolio:nth-child(1),.portfolio:nth-child(2),.portfolio:nth-child(3)
+.portfolio-container a
   height: 315px
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
+  @include trans
 
-.portfolio:nth-child(1)
+.portfolio-container a:active,.portfolio-container a:focus
+  box-shadow: 0 7px 14px rgba(0,0,0,0.25), 0 2px 2px rgba(0,0,0,0.22)
+  @include transf
+
+.portfolio-container a:nth-child(1)
   background: url('../img/website1.png')
   background-position: center top
   background-repeat: no-repeat
   background-size: cover
 
-.portfolio:nth-child(2)
+.portfolio-container a:nth-child(2)
   background: url('../img/website2.png')
   background-position: center top
   background-repeat: no-repeat
   background-size: cover
 
-.portfolio:nth-child(3)
+.portfolio-container a:nth-child(3)
   background: url('../img/website3.png')
   background-position: center top
   background-repeat: no-repeat
@@ -431,6 +469,7 @@ input
   outline: none
   background: transparent
   font-family: 'Roboto', sans-serif
+  @include trans
 
 input[type=text]
   flex: 1
@@ -446,8 +485,9 @@ input[type=submit]
   color: $winter
   cursor: pointer
 
-input[type=submit]:active,input[type=submit]:focus
+input[type=submit]:active,input[type=submit]:focus,button:active
   color: $darkness
+  @include transf
 
 input:active,input:focus,textarea:active,textarea:focus
   border: 2px solid $darkness
@@ -459,6 +499,7 @@ textarea
   font-family: 'Roboto', sans-serif
   outline: none
   background: transparent
+  transition: .2s ease-in-out
 
 input::-webkit-input-placeholder
   font-family: 'Roboto', sans-serif
@@ -608,7 +649,7 @@ textarea:focus:-ms-input-placeholder
     margin: 0
     height: 85px
 
-  .nav-list,.nav-icons,.top button
+  .nav-list,.nav-icons,.top-button
     display: none
 
   .nav button
@@ -616,10 +657,15 @@ textarea:focus:-ms-input-placeholder
     outline: none
 
   .nav-item
-    display: inline-block !important
-    padding: 0 !important
+    display: inline-block
     line-height: 85px
-    height: auto !important
+    height: auto
+
+  .nav-item a
+    padding: 0
+
+  .nav-item a:hover
+    box-shadow: 0 0 0 0
 
   .top
     grid-column: 1/2
