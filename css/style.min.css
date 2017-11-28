@@ -450,6 +450,7 @@ p {
   grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
   grid-template-rows: repeat(3, 1fr);
   grid-column: 2/3;
+  grid-gap: 50px;
   margin: 75px 15px
 }
 
@@ -458,7 +459,6 @@ p {
   display: -ms-flexbox;
   display: flex;
   flex-direction: column;
-  margin: 0 25px 50px 0
 }
 
 #conditions, .conditions-container {
